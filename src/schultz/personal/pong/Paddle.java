@@ -52,7 +52,7 @@ public class Paddle {
 		return height;
 	}
 	
-	public int speed() {
+	public int getSpeed() {
 		return speed;
 	}
 

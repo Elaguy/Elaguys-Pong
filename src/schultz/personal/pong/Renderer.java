@@ -1,20 +1,32 @@
 package schultz.personal.pong;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.*;
 
-public class Renderer extends JPanel {
+public class Renderer extends JPanel implements KeyListener {
 	
+	private boolean upPressed;
+	private boolean downPressed;
+	
+	public Renderer() {
+		setFocusable(true);
+		addKeyListener(this);
+	}
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		render(g);
 	}
 	
 	public void update() {
-		System.out.println("In update method");
-		moveBall();
-		wallBounce();
-		System.out.println("Wall bounce");
+		Pong.ball.moveBall(Pong.ball);
+		Pong.ball.wallBounce(Pong.ball);
+		Pong.ball.paddleBounce(Pong.ball, Pong.paddle1);
+		Pong.ball.paddleBounce(Pong.ball, Pong.paddle2);
+		movePaddle(Pong.paddle1);
+		movePaddle(Pong.paddle2);
 	}
 	
 	private void render(Graphics g) {
@@ -22,28 +34,15 @@ public class Renderer extends JPanel {
 		renderObjects(g);
 	}
 	
-	private void moveBall() {
-		Pong.ball.setXPos(Pong.ball.getXPos() + Pong.ball.getXDelta());
-		Pong.ball.setYPos(Pong.ball.getYPos() + Pong.ball.getYDelta());
-	}
-	
-	private void wallBounce() {
-		if(Pong.ball.getXPos() >= Pong.frameObj.getWidth()) {
-			Pong.ball.setXDelta(Pong.ball.getXDelta() * -1);
-			Pong.ball.setYDelta(Pong.ball.getYDelta() * -1);
+	private void movePaddle(Paddle paddle) {
+		if(upPressed) {
+			if(paddle.getYPos()-paddle.getSpeed() > 10)
+				paddle.setYPos(paddle.getYPos()-paddle.getSpeed());
 		}
 		
-		if(Pong.ball.getXPos() <= 0) {
-			Pong.ball.setXDelta(Pong.ball.getXDelta() * -1);
-		}
-		
-		if(Pong.ball.getYPos() <= 0) {
-			Pong.ball.setYDelta(Pong.ball.getYDelta() * -1);
-			Pong.ball.setXDelta(Pong.ball.getXDelta() * -1);
-		}
-		
-		if(Pong.ball.getYPos() >= Pong.frameObj.getHeight()) {
-			Pong.ball.setYDelta(Pong.ball.getYDelta() * -1);
+		if(downPressed) {
+			if(paddle.getYPos()+paddle.getSpeed() < Pong.frameObj.getHeight()-85)
+				paddle.setYPos(paddle.getYPos()+paddle.getSpeed());
 		}
 	}
 	
@@ -57,5 +56,25 @@ public class Renderer extends JPanel {
 
 	public Dimension getPreferredSize() {
 		return new Dimension(Pong.frameObj.getWidth(), Pong.frameObj.getHeight());
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_UP)
+			upPressed = true;
+		else if(e.getKeyCode() == KeyEvent.VK_DOWN)
+			downPressed = true;
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_UP)
+			upPressed = false;
+		else if(e.getKeyCode() == KeyEvent.VK_DOWN)
+			downPressed = false;
 	}
 }

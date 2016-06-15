@@ -1,12 +1,15 @@
 ELAGUY'S PONG DEVLOG
 --------------------
 
-Current Version: 0.1i (in-development)
+Current Version: 0.3i (in-development)
 
-VERSION: 0.1i
+VERSION: 0.3i
 -------------
 - Game skeleton written
 - JFrame, JPanel, Graphics implemented
 - Simple ball bouncing off walls implemented
 - Restructured the way other classes access the objects from Pong
 - Unmoveable paddles implemented
+- Enabled player's paddle movement
+- Code restructure pertaining to ball logic and movement
+- Player's paddle collision with ball works
