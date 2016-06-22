@@ -24,27 +24,35 @@ public class Ball {
 	}
 	
 	public void wallBounce(Ball ball) {
-		if(ball.getXPos()+ball.getWidth() >= Pong.frameObj.getWidth()) {
+		if(ball.getXPos()+ball.getWidth() >= Pong.frameObj.getWidth()-10) { // right
 			ball.setXDelta(ball.getXDelta() * -1);
+			Pong.score.setPlayerScore(Pong.score.getPlayerScore() + 1);
+			Pong.sound.playSound("blip2.wav");
 		}
 		
-		if(ball.getXPos() <= 0) {
+		if(ball.getYPos()+ball.getWidth() >= Pong.frameObj.getHeight()) { // bottom
+			ball.setYDelta(ball.getYDelta() * -1);
+			Pong.sound.playSound("blip3.wav");
+		}
+		
+		if(ball.getXPos() <= 0+10) { // left
 			ball.setXDelta(ball.getXDelta() * -1);
+			Pong.score.setAiScore(Pong.score.getAiScore() + 1);
+			Pong.sound.playSound("blip4.wav");
 		}
 		
-		if(ball.getYPos() <= 0) {
+		if(ball.getYPos() <= 0) { // top
 			ball.setYDelta(ball.getYDelta() * -1);
-		}
-		
-		if(ball.getYPos()+ball.getWidth() >= Pong.frameObj.getHeight()) {
-			ball.setYDelta(ball.getYDelta() * -1);
+			Pong.sound.playSound("blip5.wav");
 		}
 	}
 	
 	public void paddleBounce(Ball ball, Paddle paddle) {
-		if(ball.getXPos() > paddle.getXPos() && ball.getXPos() < paddle.getXPos() + paddle.getWidth())
-			if(ball.getYPos() > paddle.getYPos() && ball.getYPos() < paddle.getYPos() + paddle.getHeight())
+		if((ball.getXPos() + ball.getWidth()) > paddle.getXPos() && ball.getXPos() < paddle.getXPos() + paddle.getWidth())
+			if((ball.getYPos() + ball.getHeight()) > paddle.getYPos() && ball.getYPos() < paddle.getYPos() + paddle.getHeight()) {
 				ball.setXDelta(ball.getXDelta() * -1);
+				Pong.sound.playSound("blip1.wav");
+			}
 	}
 	
 	public void setXPos(int x) {

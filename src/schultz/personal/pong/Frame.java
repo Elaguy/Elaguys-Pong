@@ -8,7 +8,7 @@ import javax.swing.Timer;
 public class Frame implements ActionListener {
 	
 	private JFrame frame;
-	private Timer timer;
+	public static Timer timer;
 	
 	private int width;
 	private int height;

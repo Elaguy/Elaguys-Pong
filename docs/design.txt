@@ -1,7 +1,7 @@
 ELAGUY'S PONG DESIGN DOCUMENT
 -----------------------------
 
-CURRENT VERSION: 0.1i (in-development)
+CURRENT VERSION: 0.9r (released)
 
 DESCRIPTION: A pong game written in Java, using java.awt and javax.swing
 technologies (no third-party libraries)
@@ -9,9 +9,11 @@ technologies (no third-party libraries)
 OUTLINE
 =======
 Classes:
-- Pong
-- Renderer
-- Paddle
-- Player
 - Ai
 - Ball
+- Frame
+- Paddle
+- Pong
+- Renderer
+- Score
+- Sound
