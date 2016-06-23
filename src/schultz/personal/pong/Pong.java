@@ -16,7 +16,7 @@ public class Pong {
 	public Pong() {
 		frameObj = new Frame();
 		renderer = new Renderer();
-		ball = new Ball(frameObj.getWidth()/2, frameObj.getHeight()/2, 12, 12, 3, 3);
+		ball = new Ball(frameObj.getWidth()/2, frameObj.getHeight()/2, 12, 12, 3, 3, 15);
 		paddle1 = new Paddle(10, frameObj.getHeight()-100, 10, 75, 5);
 		paddle2 = new Paddle(frameObj.getWidth()-20, frameObj.getHeight()/2, 10, 75, 2);
 		ai = new Ai(paddle2);

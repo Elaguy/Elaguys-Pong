@@ -8,14 +8,16 @@ public class Ball {
 	private int height;
 	private int xDelta;
 	private int yDelta;
+	private int wallOffset;
 
-	public Ball(int x, int y, int w, int h, int xDel, int yDel) {
+	public Ball(int x, int y, int w, int h, int xDel, int yDel, int offset) {
 		xPos = x;
 		yPos = y;
 		width = w;
 		height = h;
 		xDelta = xDel;
 		yDelta = yDel;
+		wallOffset = offset;
 	}
 	
 	public void moveBall(Ball ball) {
@@ -24,7 +26,7 @@ public class Ball {
 	}
 	
 	public void wallBounce(Ball ball) {
-		if(ball.getXPos()+ball.getWidth() >= Pong.frameObj.getWidth()-10) { // right
+		if(ball.getXPos()+ball.getWidth() >= Pong.frameObj.getWidth()-wallOffset) { // right
 			ball.setXDelta(ball.getXDelta() * -1);
 			Pong.score.setPlayerScore(Pong.score.getPlayerScore() + 1);
 			Pong.sound.playSound("blip2.wav");
@@ -35,7 +37,7 @@ public class Ball {
 			Pong.sound.playSound("blip3.wav");
 		}
 		
-		if(ball.getXPos() <= 0+10) { // left
+		if(ball.getXPos() <= 0+wallOffset) { // left
 			ball.setXDelta(ball.getXDelta() * -1);
 			Pong.score.setAiScore(Pong.score.getAiScore() + 1);
 			Pong.sound.playSound("blip4.wav");
